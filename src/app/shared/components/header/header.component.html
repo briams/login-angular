@@ -1,21 +1,16 @@
-
-{{ isAdmin }} - Role
 <mat-toolbar color="primary">
-  <ng-container *ngIf="!isAdmin; else viewAdmin">
-    <span>MY APP</span>
-    <span class="spacer"></span>
-    <div>
-      <a mat-button [routerLink]="'/login'">Login</a>
-      <a mat-button>Logout</a>
-      <a mat-button [routerLink]="'/admin'">Admin</a>
-    </div>
+  <ng-container *ngIf="isAdmin == 'admin'">
+    <button mat-icon-button (click)="onTtoggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
   </ng-container>
-  <button (click)="isAdmin = !isAdmin">Change</button>
-</mat-toolbar>
 
-<ng-template #viewAdmin>
-  <button mat-icon-button (click)="onTtoggleSidenav()">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <span>MY APP</span>
   <span class="spacer"></span>
+  <a *ngIf="!isLogged; else viewLogout" mat-button routerLink="/login">Login</a>
+  <a *ngIf="isAdmin == 'admin'" mat-button routerLink="/admin">Admin</a>
+  <!-- <button (click)="isAdmin = !isAdmin">Change</button> -->
+</mat-toolbar>
+<ng-template #viewLogout>
+  <a mat-button (click)="onLogout()"> Logout</a>
 </ng-template>
